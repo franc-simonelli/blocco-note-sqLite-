@@ -25,7 +25,7 @@ class DBProvider {
   Future _initDB() async {
     // count the number of scripts to define the version of the database
     Directory? documentsDirectory = await getExternalStorageDirectory();
-    String path = join(documentsDirectory!.path, "databaseBloccoNote.db");
+    String path = join(documentsDirectory!.path, "bloccoNote.db");
 
     int nbrMigrationScripts = migrationScripts.length;
     var db = await openDatabase(
@@ -59,7 +59,7 @@ class DBProvider {
     1: 
       [
         "CREATE TABLE Note (id INTEGER PRIMARY KEY AUTOINCREMENT, titolo, testo)",
-        // "CREATE TABLE Lista (id INTEGER PRIMARY KEY AUTOINCREMENT, testo, check)",
+        // "CREATE TABLE Attivita (id INTEGER PRIMARY KEY AUTOINCREMENT, testo, check)",
       ],
     
   };

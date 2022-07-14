@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, equal_keys_in_map
 
 import 'package:blocconote/models/nota.model.dart';
-import 'package:blocconote/provider/listProvider.dart';
+import 'package:blocconote/provider/attivitaProvider.dart';
 import 'package:blocconote/provider/noteProvider.dart';
 import 'package:blocconote/screen/addNote/addNote.screen.dart';
 import 'package:blocconote/screen/home/widget/grid.widget.dart';
@@ -12,6 +12,8 @@ import 'package:flutter_reorderable_grid_view/entities/order_update_entity.dart'
 import 'package:flutter_reorderable_grid_view/widgets/reorderable_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:reorderable_grid_view/reorderable_grid_view.dart';
+
+import '../addAttivita/addAttivitaScreen.dart';
 
 class HomePageScreen extends StatefulWidget {
   HomePageScreen({ Key? key }) : super(key: key);
@@ -26,8 +28,11 @@ class _HomePageScreenState extends State<HomePageScreen> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+    var keyBoard = MediaQuery.of(context).viewInsets.bottom;
+    print(keyBoard);
 
     Provider.of<NoteProvider>(context, listen: false).getAll();
+    // Provider.of<AttivitaProvider>(context, listen: false).getAll();
     
     return Scaffold(
       body: Column( 
@@ -55,7 +60,7 @@ class _HomePageScreenState extends State<HomePageScreen> with SingleTickerProvid
                     ],
                   ),
                 ),
-                ListViewWidget()
+                ListViewWidget(keyBoard)
               ],
               controller: _tabController,
             ),
@@ -66,7 +71,13 @@ class _HomePageScreenState extends State<HomePageScreen> with SingleTickerProvid
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add, color: AppTheme.primary,),
         onPressed: (){
-          Navigator.of(context).pushNamed(AddNoteScreen.routeName);
+          if(_tabController.index == 0) {
+            Navigator.of(context).pushNamed(AddNoteScreen.routeName);
+          }else {
+            Navigator.of(context).pushNamed(AddAttivitaScreen.routeName);
+            // Provider.of<AttivitaProvider>(context, listen: false).setShowAdd();
+          }
+          
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

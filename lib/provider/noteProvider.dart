@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
-import 'package:blocconote/repository/data.repository.note.dart';
-import 'package:blocconote/repository/note.sql.repository.dart';
+import 'package:blocconote/repository/dataRepositoryNote.dart';
+import 'package:blocconote/repository/noteSqlRepository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 

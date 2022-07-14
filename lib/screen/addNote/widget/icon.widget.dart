@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
 
+import '../../../provider/attivitaProvider.dart';
 import '../../../provider/noteProvider.dart';
 import '../../../utils/myTheme.dart';
 
 class IconWidget extends StatelessWidget {
-  IconWidget(GlobalKey<FormState> this.formKey, this.item, {
+  IconWidget(GlobalKey<FormState> this.formKey, this.item, this.sezione, {
     Key? key,
   }) : super(key: key);
 
   final formKey;
   final item;
+  final sezione;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class IconWidget extends StatelessWidget {
       children: [
         NeumorphicButton(
           onPressed: () {
-            Provider.of<NoteProvider>(context, listen: false).reset();
+            sezione == 'note' ? Provider.of<NoteProvider>(context, listen: false).reset() : Provider.of<AttivitaProvider>(context, listen: false).reset();
             Navigator.of(context).pop();
           },
           style: NeumorphicStyle(
@@ -37,12 +39,21 @@ class IconWidget extends StatelessWidget {
         ),
         NeumorphicButton(
           onPressed: () async {
-            formKey.currentState!.save();    
-            if(item != null) {
-              await Provider.of<NoteProvider>(context, listen: false).updateNote(item);
+            formKey.currentState!.save();   
+            if(sezione == 'note') {
+              if(item != null) {
+                await Provider.of<NoteProvider>(context, listen: false).updateNote(item);
+              }else {
+                await Provider.of<NoteProvider>(context, listen: false).addNota();
+              }   
             }else {
-              await Provider.of<NoteProvider>(context, listen: false).addNota();
-            }    
+              if(item != null) {
+                await Provider.of<AttivitaProvider>(context, listen: false).updateAttivita(item);
+              }else {
+                await Provider.of<AttivitaProvider>(context, listen: false).addAttivita();
+              }   
+            }
+             
             
             Navigator.of(context).pop();
           },

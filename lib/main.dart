@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:blocconote/provider/listProvider.dart';
+import 'package:blocconote/provider/attivitaProvider.dart';
 import 'package:blocconote/provider/noteProvider.dart';
+import 'package:blocconote/screen/addAttivita/addAttivitaScreen.dart';
 import 'package:blocconote/screen/addNote/addNote.screen.dart';
 import 'package:blocconote/screen/home/homePageScreen.dart';
 import 'package:blocconote/utils/myTheme.dart';
@@ -18,7 +19,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => NoteProvider()),
-        ChangeNotifierProvider(create: (_) => ListProvider()),
+        ChangeNotifierProvider(create: (_) => AttivitaProvider()),
       ],
       child: MyApp(),
     )
@@ -26,7 +27,8 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: AppTheme.primary
     )
   );
 }
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Provider.of<NoteProvider>(context, listen: false).initRepository();
+    // Provider.of<AttivitaProvider>(context, listen: false).initRepository();
     
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -60,6 +63,7 @@ class ModuleContainer {
 Map<String, Widget Function(BuildContext)> createRoutes() {
   return {
     AddNoteScreen.routeName: (ctx) => AddNoteScreen(),
+    AddAttivitaScreen.routeName: (ctx) => AddAttivitaScreen(),
   };
 }
 

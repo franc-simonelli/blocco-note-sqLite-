@@ -1,6 +1,6 @@
 // ignore_for_file: override_on_non_overriding_member, unused_field, file_names
 import 'package:blocconote/models/nota.model.dart';
-import 'package:blocconote/repository/data.repository.note.dart';
+import 'package:blocconote/repository/dataRepositoryNote.dart';
 import 'package:blocconote/repository/db.provider.dart';
 import 'package:sqflite/sqflite.dart';
 

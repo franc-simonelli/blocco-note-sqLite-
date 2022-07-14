@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/lista.model.dart';
-import '../../../provider/listProvider.dart';
+import '../../../provider/attivitaProvider.dart';
 import '../../../utils/myTheme.dart';
 
-Widget listTileWidget(Lista item, int index, BuildContext context) {
+Widget listTileWidget(Attivita item, int index, BuildContext context) {
     return Padding(
       key: Key(index.toString()),
       padding: const EdgeInsets.all(5.0),
@@ -34,12 +34,12 @@ Widget listTileWidget(Lista item, int index, BuildContext context) {
           leading: item.check
             ? 
             GestureDetector(
-              onTap: () {Provider.of<ListProvider>(context, listen: false).changeCheck(item);},
+              onTap: () {Provider.of<AttivitaProvider>(context, listen: false).changeCheck(item);},
               child: Icon(Icons.check_box, color: Colors.orange,)
             )
             : 
             GestureDetector(
-              onTap: () {Provider.of<ListProvider>(context, listen: false).changeCheck(item);},
+              onTap: () {Provider.of<AttivitaProvider>(context, listen: false).changeCheck(item);},
               child: Icon(Icons.check_box_outline_blank)
             ),
 

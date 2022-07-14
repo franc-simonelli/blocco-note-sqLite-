@@ -1,17 +1,17 @@
 // ignore_for_file: prefer_collection_literals, unnecessary_new, unnecessary_this
 
-class Lista {
+class Attivita {
   late int? id;
   late String? testo;
   late bool check;
 
-  Lista({
+  Attivita({
     this.id = 0,
     this.testo = "",
     this.check = false,
   });
 
-  Lista.fromJson(Map<String, dynamic> json) {
+  Attivita.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     testo = json['testo'];
     check = json['check'];;
